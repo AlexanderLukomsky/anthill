@@ -5,6 +5,7 @@
   "workspaces": [
     "apps/*",
     "packages/*",
+    "packages.icons/*",
     "configs/*"
   ],
   "scripts": {
@@ -15,9 +16,9 @@
     "format-check": "prettier --check \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
+    "eslint": "8.42.0",
     "eslint-config-custom": "*",
     "prettier": "^2.8.7",
-    "eslint": "8.42.0",
     "turbo": "^1.9.7"
   },
   "engines": {
