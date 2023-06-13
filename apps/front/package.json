@@ -9,20 +9,30 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@hookform/resolvers": "^3.1.1",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.13.5",
     "eslint-config-next": "13.4.5",
     "next": "13.4.5",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.44.3",
+    "yup": "^1.2.0",
+    "theme.scheme": "*",
+    "packages.inputs.button": "*",
+    "packages.inputs.input": "*",
+    "packages.rhf.inputs.input": "*"
   },
   "devDependencies": {
     "@types/node": "20.3.1",
     "@types/react": "18.2.12",
     "@types/react-dom": "18.2.5",
-    "eslint-config-custom": "*",  
-    "settings.config-typescript": "*",
-    "prettier": "^2.8.7",
     "eslint": "8.42.0",
+    "eslint-config-custom": "*",
+    "prettier": "^2.8.7",
+    "settings.config-typescript": "*",
     "typescript": "5.1.3"
   }
 }
-
