@@ -7,7 +7,7 @@ export const textFieldStyle = {
       '&:hover': {
         '&:before': {
           borderBottom: '2px solid',
-          borderColor: 'dark.300',
+          borderColor: 'dark.100',
         },
       },
       '&:after': {
