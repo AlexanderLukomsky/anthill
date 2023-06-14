@@ -77,7 +77,8 @@
     "packages.icons.trending-up": "*",
     "prop-types": "^15.8.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "theme.scheme": "*"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "7.0.12",
