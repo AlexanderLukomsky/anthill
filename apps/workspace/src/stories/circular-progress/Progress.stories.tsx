@@ -1,8 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { CircularProgress, CircularProgressProps } from 'packages.components.circular-progress';
+import {
+  CircularProgress as ComponentCircularProgress,
+  CircularProgressProps,
+} from 'packages.components.circular-progress';
 import { StoryCopyButton } from 'src/components/story-copy-button';
 
-const Template = (props: CircularProgressProps) => (
+const CircularProgress = (props: CircularProgressProps) => (
   <>
     <StoryCopyButton
       path={
@@ -10,13 +13,13 @@ const Template = (props: CircularProgressProps) => (
       }
     />
 
-    <CircularProgress {...props} />
+    <ComponentCircularProgress {...props} />
   </>
 );
 
 const meta: Meta<CircularProgressProps> = {
   title: 'UI/CircularProgress',
-  component: Template,
+  component: CircularProgress,
   tags: ['autodocs'],
 };
 
