@@ -4,10 +4,12 @@ export const textFieldStyle = {
       '&:before': {
         borderColor: 'dark.300',
       },
-      '&:hover': {
-        '&:before': {
-          borderBottom: '2px solid',
-          borderColor: 'dark.100',
+      '&.MuiInput-root': {
+        '&:hover': {
+          '&:before': {
+            borderBottom: '2px solid',
+            borderColor: 'dark.100',
+          },
         },
       },
       '&:after': {

@@ -56,21 +56,24 @@ export const Input: FC<InputProps> = ({
         InputProps={{
           sx: { ...inputStyle[style] },
 
-          endAdornment: (
+          endAdornment: type === 'password' && (
             <InputAdornment position="end">
-              {type === 'password' && (
-                <IconButton onClick={() => setShow(!show)}>
-                  {show && <EyeOnIconOutline sx={iconStyle[style]} />}
+              <IconButton onClick={() => setShow(!show)}>
+                {show && <EyeOnIconOutline sx={iconStyle[style]} />}
 
-                  {!show && <EyeOffIconOutline sx={iconStyle[style]} />}
-                </IconButton>
-              )}
+                {!show && <EyeOffIconOutline sx={iconStyle[style]} />}
+              </IconButton>
             </InputAdornment>
           ),
         }}
       />
+
       {helperText !== undefined && (
-        <Typography variant="regular_text_14" sx={{ height: '16px', ...helperTextStyle[style] }}>
+        <Typography
+          component="p"
+          variant="regular_text_14"
+          sx={{ height: '18px', ...helperTextStyle[style] }}
+        >
           {helperText}
         </Typography>
       )}

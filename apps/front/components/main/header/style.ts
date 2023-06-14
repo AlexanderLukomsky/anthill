@@ -1,0 +1,16 @@
+export const headerStyle = {
+  position: 'fixed',
+  left: 0,
+  top: 0,
+  right: 0,
+  height: '60px',
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  backgroundColor: 'dark.700',
+  borderBottom: '1px solid',
+  borderColor: 'dark.300',
+  padding: '0 60px 0',
+  zIndex: '1000',
+};
