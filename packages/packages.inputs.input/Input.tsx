@@ -19,7 +19,7 @@ import 'settings.config-muidts';
 
 export type InputProps = {
   type?: 'text' | 'password';
-  inputSx: SxProps;
+  inputSx?: SxProps;
   containerProps?: BoxProps;
 } & Omit<TextFieldProps, 'multiline' | 'type' | 'variant' | 'InputProps'>;
 

@@ -22,7 +22,8 @@
     "yup": "^1.2.0",
     "theme.scheme": "*",
     "packages.inputs.button": "*",
-    "packages.inputs.input": "*"
+    "packages.inputs.input": "*",
+    "packages.rhf.inputs.input": "*"
   },
   "devDependencies": {
     "@types/node": "20.3.1",
