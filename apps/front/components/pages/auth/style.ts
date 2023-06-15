@@ -18,4 +18,4 @@ export const SignLinkStyle = {
   color: 'primary.500',
 };
 
-export const descriptionStyle = { m: '18px 0 12px' };
+export const descriptionStyle = { m: '18px 0 12px', textAlign: 'center' };

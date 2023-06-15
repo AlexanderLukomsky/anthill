@@ -59,12 +59,12 @@ export const Login = () => {
           </Typography>
         </Link>
 
-        <Button sx={buttonStyle} color="primary" onClick={handleSubmit(onSubmit)}>
+        <Button sx={buttonStyle} color="primary" type="submit">
           Sign In
         </Button>
       </form>
 
-      <Typography component="p" align="center" sx={descriptionStyle} variant="regular_text_16">
+      <Typography component="p" sx={descriptionStyle} variant="regular_text_16">
         Don&apos;t have an account?
       </Typography>
 

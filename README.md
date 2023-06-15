@@ -28,4 +28,4 @@ yarn storybook
 pnpm storybook
 ```
 
-Open [http://http://localhost:6006](http://localhost:6006) with your browser to see the result.
+Open [http://localhost:6006](http://localhost:6006) with your browser to see the result.
