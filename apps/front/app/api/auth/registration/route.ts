@@ -27,21 +27,25 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ message: 'password is required' }, { status: 400 });
   }
 
-  const isRegisteredUser = await prisma.user.findFirst({
-    where: { email },
-  });
+  try {
+    const isRegisteredUser = await prisma.user.findFirst({
+      where: { email },
+    });
 
-  if (isRegisteredUser) {
-    return NextResponse.json({ message: 'user already registered' }, { status: 400 });
+    if (isRegisteredUser) {
+      return NextResponse.json({ message: 'user already registered' }, { status: 400 });
+    }
+
+    await prisma.user.create({
+      data: {
+        email,
+        userName,
+        password,
+      },
+    });
+
+    return NextResponse.json({ message: 'created' }, { status: 201 });
+  } catch (error) {
+    return NextResponse.json({ message: 'failed to connect to db' }, { status: 400 });
   }
-
-  await prisma.user.create({
-    data: {
-      email,
-      userName,
-      password,
-    },
-  });
-
-  return NextResponse.json({ message: 'created' }, { status: 201 });
 }

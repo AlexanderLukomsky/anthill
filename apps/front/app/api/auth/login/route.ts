@@ -9,16 +9,20 @@ export async function POST(request: NextRequest, response: NextResponse) {
 
   const { email, password } = body;
 
-  const user = await prisma.user.findFirst({
-    where: {
-      email,
-    },
-  });
+  try {
+    const user = await prisma.user.findFirst({
+      where: {
+        email,
+      },
+    });
 
-  if (user) {
-    if (user.password === password) {
-      return NextResponse.json({ data: user, message: 'success' }, { status: 200 });
+    if (user) {
+      if (user.password === password) {
+        return NextResponse.json({ data: user, message: 'success' }, { status: 200 });
+      }
+      return NextResponse.json({ message: 'incorrect password' }, { status: 400 });
     }
-    return NextResponse.json({ message: 'incorrect password' }, { status: 400 });
+  } catch (error) {
+    return NextResponse.json({ message: 'failed to connect to db' }, { status: 400 });
   }
 }
