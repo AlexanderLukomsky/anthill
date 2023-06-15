@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && prisma generate",
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate"
@@ -16,6 +16,7 @@
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.5",
     "@prisma/client": "^4.15.0",
+    "@vercel/postgres": "^0.3.1",
     "eslint-config-next": "13.4.5",
     "next": "13.4.5",
     "packages.inputs.button": "*",

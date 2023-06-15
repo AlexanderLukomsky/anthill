@@ -1,14 +1,11 @@
+import { prisma } from 'lib/prisma';
 import { NextRequest, NextResponse } from 'next/server';
-
-import { PrismaClient } from '@prisma/client';
 
 type RegistrationBody = {
   email: string;
   userName: string;
   password: string;
 };
-
-const prisma = new PrismaClient();
 
 export async function POST(request: NextRequest) {
   const body: RegistrationBody = await request.json();
