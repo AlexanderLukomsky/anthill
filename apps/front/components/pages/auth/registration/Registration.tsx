@@ -64,7 +64,7 @@ export const Registration = () => {
 
   return (
     <AuthForm isLoading={isLoading}>
-      <Typography variant="h1" sx={titleStyle}>
+      <Typography color="light.100" variant="h1" sx={titleStyle}>
         Sign Up
       </Typography>
 
@@ -106,7 +106,7 @@ export const Registration = () => {
         </Button>
       </form>
 
-      <Typography variant="regular_text_16" sx={descriptionStyle}>
+      <Typography color="light.100" variant="regular_text_16" sx={descriptionStyle}>
         Do you have an account?
       </Typography>
 

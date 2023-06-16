@@ -25,7 +25,7 @@ export const Login = () => {
 
   return (
     <AuthForm>
-      <Typography variant="h1" sx={titleStyle}>
+      <Typography color="light.100" variant="h1" sx={titleStyle}>
         Sign in
       </Typography>
 
@@ -64,7 +64,7 @@ export const Login = () => {
         </Button>
       </form>
 
-      <Typography component="p" sx={descriptionStyle} variant="regular_text_16">
+      <Typography color="light.100" component="p" sx={descriptionStyle} variant="regular_text_16">
         Don&apos;t have an account?
       </Typography>
 
