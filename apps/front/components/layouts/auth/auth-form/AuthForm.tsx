@@ -1,13 +1,16 @@
 import { FC, ReactNode } from 'react';
 import { Stack, SxProps } from 'mui.lib';
+import { CircularProgress } from 'packages.components.circular-progress';
 
 export type AuthFormProps = {
   children: ReactNode;
   sx?: SxProps;
+  isLoading?: boolean;
 };
-export const AuthForm: FC<AuthFormProps> = ({ children, sx }) => (
+export const AuthForm: FC<AuthFormProps> = ({ children, sx, isLoading }) => (
   <Stack
     sx={{
+      position: 'relative',
       backgroundColor: 'dark.500',
       border: '1px solid',
       borderColor: 'dark.300',
@@ -19,5 +22,6 @@ export const AuthForm: FC<AuthFormProps> = ({ children, sx }) => (
     }}
   >
     {children}
+    {isLoading && <CircularProgress />}
   </Stack>
 );
