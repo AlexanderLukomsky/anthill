@@ -25,6 +25,10 @@ export const CircularProgress: FC<CircularProgressProps> = ({
       justifyContent="center"
       sx={{
         position: 'absolute',
+        left: 0,
+        top: 0,
+        right: 0,
+        bottom: 0,
         zIndex: 10002,
         width: '100%',
         height: '100%',
