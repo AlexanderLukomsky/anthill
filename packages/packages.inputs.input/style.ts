@@ -1,3 +1,7 @@
+import { getScheme } from 'theme.scheme';
+
+const { palette } = getScheme();
+
 export const textFieldStyle = {
   default: {
     '& .MuiInputBase-root': {
@@ -44,9 +48,23 @@ export const textFieldStyle = {
 export const inputStyle = {
   default: {
     color: 'light.100',
+
+    '&.MuiInputBase-root:has(> input:-webkit-autofill)': {
+      input: {
+        WebkitTextFillColor: palette.light[100],
+        WebkitBoxShadow: `0 0 0 30px ${palette.dark[500]} inset`,
+      },
+    },
   },
   error: {
     color: 'danger.300',
+
+    '&.MuiInputBase-root:has(> input:-webkit-autofill)': {
+      input: {
+        WebkitTextFillColor: palette.danger[300],
+        WebkitBoxShadow: `0 0 0 30px ${palette.dark[500]} inset`,
+      },
+    },
   },
 };
 
