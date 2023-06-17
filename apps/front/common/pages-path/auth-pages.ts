@@ -1,5 +1,5 @@
 export enum AuthPages {
-  Login = '/auth/login',
+  SignIn = '/auth/sign-in',
   Registration = '/auth/registration',
   NewPassword = '/auth/new-password',
 }

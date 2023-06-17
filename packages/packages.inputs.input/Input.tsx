@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import { EyeOnIconOutline } from 'packages.icons.eye-on-outline';
 import { EyeOffIconOutline } from 'packages.icons.eye-off-outline';
-import { helperTextStyle, iconStyle, inputStyle, textFieldStyle } from './style';
+import { helperTextStyle, inputStyle, textFieldStyle } from './style';
 
 import 'settings.config-muidts';
 
@@ -51,7 +51,6 @@ export const Input: FC<InputProps> = ({
         value={value}
         onChange={onChange}
         sx={{ width: '100%', ...textFieldStyle[style], ...sx }}
-        error={error}
         {...rest}
         InputProps={{
           sx: { ...inputStyle[style] },
@@ -59,9 +58,9 @@ export const Input: FC<InputProps> = ({
           endAdornment: type === 'password' && (
             <InputAdornment position="end">
               <IconButton onClick={() => setShow(!show)}>
-                {show && <EyeOnIconOutline sx={iconStyle[style]} />}
+                {show && <EyeOnIconOutline sx={{ color: 'light.900' }} />}
 
-                {!show && <EyeOffIconOutline sx={iconStyle[style]} />}
+                {!show && <EyeOffIconOutline sx={{ color: 'light.900' }} />}
               </IconButton>
             </InputAdornment>
           ),

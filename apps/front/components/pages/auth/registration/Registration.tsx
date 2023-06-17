@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import Typography from '@mui/material/Typography';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -9,15 +8,13 @@ import { InputWithHookForm } from 'packages.rhf.inputs.input';
 import Link from 'next/link';
 import { AuthForm } from 'components/layouts/auth/auth-form';
 import { AuthPages } from 'common/pages-path/auth-pages';
-import { registrationSchema } from 'common/validation';
-import { RegistrationData, authAPI } from 'services/auth';
-import { handleError } from 'common/helpers';
-import { useState } from 'react';
+import { RegistrationSchema, registrationSchema } from 'common/validation';
+import { useRegistrationMutation } from 'services/auth/api';
+import { useRouter } from 'next/navigation';
 import { SignLinkStyle, buttonStyle, descriptionStyle, inputStyle, titleStyle } from '../style';
 
 export const Registration = () => {
-  const [errorMessage, setErrorMessage] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [registration, { isLoading }] = useRegistrationMutation();
 
   const { push } = useRouter();
 
@@ -27,30 +24,22 @@ export const Registration = () => {
     control,
     getValues,
     formState: { errors },
-  } = useForm<RegistrationData>({
+  } = useForm<RegistrationSchema>({
     resolver: yupResolver(registrationSchema),
     reValidateMode: 'onSubmit',
     defaultValues: { email: '', password: '', confirmPassword: '' },
   });
 
-  const onSubmit = async (values: RegistrationData) => {
+  const onSubmit = async (formData: Required<RegistrationSchema>) => {
     if (isLoading) return;
 
-    try {
-      setIsLoading(true);
-      await authAPI.registration(values);
-      push('/');
-    } catch (error) {
-      const errorMessage = handleError(error);
-      setErrorMessage(errorMessage);
-    } finally {
-      setIsLoading(false);
-    }
+    await registration(formData).unwrap();
+
+    push(AuthPages.SignIn);
   };
 
   const handleResetErrors = (field: 'email' | 'password') => {
     clearErrors(field);
-    setErrorMessage('');
   };
 
   const handleConfirmPasswordClearErrors = (field: 'confirmPassword') => {
@@ -58,7 +47,6 @@ export const Registration = () => {
 
     if (confirmPassword === password) {
       clearErrors(field);
-      setErrorMessage('');
     }
   };
 
@@ -75,8 +63,8 @@ export const Registration = () => {
           control={control}
           name="email"
           label="Email"
-          error={!!errors.email?.message || !!errorMessage}
-          helperText={errors.email?.message || errorMessage}
+          error={!!errors.email?.message}
+          helperText={errors.email?.message || ''}
         />
 
         <InputWithHookForm
@@ -86,8 +74,8 @@ export const Registration = () => {
           name="password"
           label="Password"
           type="password"
-          error={!!errors.password || !!errorMessage}
-          helperText={errors.password?.message || errorMessage}
+          error={!!errors.password}
+          helperText={errors.password?.message || ''}
         />
 
         <InputWithHookForm
@@ -97,8 +85,8 @@ export const Registration = () => {
           name="confirmPassword"
           label="Password confirmation"
           type="password"
-          error={!!errors.confirmPassword || !!errorMessage}
-          helperText={errors.confirmPassword?.message || errorMessage}
+          error={!!errors.confirmPassword}
+          helperText={errors.confirmPassword?.message || ''}
         />
 
         <Button sx={buttonStyle} type="submit">
@@ -110,7 +98,7 @@ export const Registration = () => {
         Do you have an account?
       </Typography>
 
-      <Link href={AuthPages.Login}>
+      <Link href={AuthPages.SignIn}>
         <Typography component="p" sx={SignLinkStyle} variant="regular_text_16">
           Sign In
         </Typography>

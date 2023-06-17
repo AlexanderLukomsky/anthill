@@ -1,5 +1,9 @@
-export type RegistrationData = {
+export type AuthRequestData = {
   email: string;
   password: string;
-  confirmPassword: string;
+};
+
+export type AuthError = {
+  status: number;
+  data: { message: string };
 };

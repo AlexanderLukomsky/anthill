@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-import { Stack, SxProps } from 'mui.lib';
+import { Stack, SxProps } from 'lib/mui';
 import { CircularProgress } from 'packages.components.circular-progress';
 
 export type AuthFormProps = {

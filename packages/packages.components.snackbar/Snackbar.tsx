@@ -1,3 +1,5 @@
+'use client';
+
 import { FC, SyntheticEvent } from 'react';
 import { Snackbar as MuiSnackbar, Alert } from '@mui/material';
 
@@ -19,7 +21,7 @@ export const Snackbar: FC<SnackbarProps> = ({
   onClose,
 }) => {
   const handleClose = (event?: SyntheticEvent | Event, reason?: string) => {
-    if (disableClickAway) {
+    if (reason === 'clickaway' && disableClickAway) {
       return;
     }
 

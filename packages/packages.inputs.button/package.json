@@ -3,9 +3,6 @@
   "version": "0.0.0",
   "main": "./index.tsx",
   "types": "./index.tsx",
-  "scripts": {
-    "lint": "eslint \"**/*.ts*\""
-  },
   "dependencies": {
     "react": "18.2.0",
     "@emotion/react": "^11.10.6",

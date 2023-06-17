@@ -28,6 +28,12 @@ export const textFieldStyle = {
     },
   },
   error: {
+    '& .MuiFormLabel-root': {
+      color: 'light.900',
+      '&.Mui-focused': {
+        color: 'light.900',
+      },
+    },
     '& .MuiInputBase-root': {
       '&:before': {
         borderColor: 'danger.300',
@@ -65,15 +71,6 @@ export const inputStyle = {
         WebkitBoxShadow: `0 0 0 30px ${palette.dark[500]} inset`,
       },
     },
-  },
-};
-
-export const iconStyle = {
-  default: {
-    color: 'light.900',
-  },
-  error: {
-    color: 'danger.300',
   },
 };
 

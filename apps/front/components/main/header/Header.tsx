@@ -1,4 +1,4 @@
-import { Typography, Stack } from 'mui.lib';
+import { Typography, Stack } from 'lib/mui';
 import Link from 'next/link';
 import React from 'react';
 import { headerStyle } from './style';

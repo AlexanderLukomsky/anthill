@@ -1,4 +1,4 @@
-import { Typography } from 'mui.lib';
+import { Typography } from 'lib/mui';
 import { AuthPages } from 'common/pages-path/auth-pages';
 import Link from 'next/link';
 
@@ -6,9 +6,9 @@ export default function Home() {
   return (
     <main>
       <ul>
-        <Link href={AuthPages.Login}>
+        <Link href={AuthPages.SignIn}>
           <Typography variant="h3" color="light.100">
-            login
+            sing in
           </Typography>
         </Link>
 
