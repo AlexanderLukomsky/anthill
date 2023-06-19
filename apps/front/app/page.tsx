@@ -1,33 +1,27 @@
-import { Typography } from 'lib/mui';
 import { AuthPages } from 'common/pages-path/auth-pages';
-import Link from 'next/link';
+import { Stack } from 'lib/mui';
+import { AccountPages } from 'common/pages-path/account-pages';
+import { TempList } from './temp/TempList';
+
+const auth = [
+  { path: AuthPages.SignIn, title: 'SignIn' },
+  { path: AuthPages.Registration, title: 'Registration' },
+  { path: AuthPages.NewPassword, title: 'NewPassword' },
+];
+
+const account = [
+  { path: AccountPages.Devices, title: 'Devices' },
+  { path: AccountPages.Information, title: 'Information' },
+  { path: AccountPages.Management, title: 'Management' },
+];
 
 export default function Home() {
   return (
     <main>
-      <ul>
-        <Link href={AuthPages.SignIn}>
-          <Typography variant="h3" color="light.100">
-            sing in
-          </Typography>
-        </Link>
-
-        <li>
-          <Link href={AuthPages.Registration}>
-            <Typography variant="h3" color="light.100">
-              registration
-            </Typography>
-          </Link>
-        </li>
-
-        <li>
-          <Link href={AuthPages.NewPassword}>
-            <Typography variant="h3" color="light.100">
-              new password
-            </Typography>
-          </Link>
-        </li>
-      </ul>
+      <Stack>
+        <TempList arr={auth} />
+        <TempList arr={account} />
+      </Stack>
     </main>
   );
 }

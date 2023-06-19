@@ -1,13 +1,19 @@
 'use client';
 
 import { FC } from 'react';
-import { ButtonProps as MuiButtonProps, Button as MuiButton, Typography } from '@mui/material';
+import {
+  ButtonProps as MuiButtonProps,
+  Button as MuiButton,
+  Typography,
+  TypographyProps,
+} from '@mui/material';
 import { colorStyle, disabledStyle, sizeStyle } from './style';
 
 export type ButtonProps = {
   size?: 'large' | 'medium';
   variant?: 'contained' | 'outlined' | 'text';
   color?: 'primary' | 'light' | 'danger';
+  typographyProps?: TypographyProps;
 } & Omit<MuiButtonProps, 'color' | 'size'>;
 
 export const Button: FC<ButtonProps> = ({
@@ -16,6 +22,7 @@ export const Button: FC<ButtonProps> = ({
   color = 'primary',
   onClick,
   children,
+  typographyProps,
   ...props
 }) => {
   const { sx, ...restProps } = props;
@@ -33,7 +40,9 @@ export const Button: FC<ButtonProps> = ({
       variant={variant}
       {...restProps}
     >
-      <Typography variant="h3">{children}</Typography>
+      <Typography variant="h3" {...typographyProps}>
+        {children}
+      </Typography>
     </MuiButton>
   );
 };
