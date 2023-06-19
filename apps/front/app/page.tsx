@@ -19,6 +19,14 @@ export default function Home() {
             </Typography>
           </Link>
         </li>
+
+        <li>
+          <Link href={AuthPages.NewPassword}>
+            <Typography variant="h3" color="light.100">
+              new password
+            </Typography>
+          </Link>
+        </li>
       </ul>
     </main>
   );

@@ -36,10 +36,17 @@ export const slice = createSlice({
         state.message = 'registration completed successfully';
       })
 
+      .addMatcher(authService.endpoints.setNewPassword.matchFulfilled, (state, action) => {
+        state.isShow = true;
+        state.severity = 'success';
+        state.message = 'password change was successful';
+      })
+
       .addMatcher(
         isAnyOf(
           authService.endpoints.registration.matchRejected,
           authService.endpoints.signIn.matchRejected,
+          authService.endpoints.setNewPassword.matchRejected,
         ),
         (state, action) => {
           state.isShow = true;

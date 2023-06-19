@@ -11,7 +11,7 @@ export const authService = createApi({
     signIn: builder.mutation<void, AuthRequestData>({
       query: (data) => ({
         method: 'POST',
-        url: EndpointsAuth.signIn,
+        url: EndpointsAuth.SignIn,
         body: data,
       }),
     }),
@@ -19,11 +19,20 @@ export const authService = createApi({
     registration: builder.mutation<void, AuthRequestData>({
       query: (data) => ({
         method: 'POST',
-        url: EndpointsAuth.registration,
+        url: EndpointsAuth.Registration,
+        body: data,
+      }),
+    }),
+
+    setNewPassword: builder.mutation<void, AuthRequestData>({
+      query: (data) => ({
+        method: 'POST',
+        url: EndpointsAuth.NewPassword,
         body: data,
       }),
     }),
   }),
 });
 
-export const { useRegistrationMutation, useSignInMutation } = authService;
+export const { useRegistrationMutation, useSignInMutation, useSetNewPasswordMutation } =
+  authService;

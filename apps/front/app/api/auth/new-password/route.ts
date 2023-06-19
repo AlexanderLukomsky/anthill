@@ -17,11 +17,22 @@ export async function POST(request: NextRequest, response: NextResponse) {
       return NextResponse.json({ message: 'user not found' }, { status: 401 });
     }
 
-    if (user.password === password) {
-      const { password, ...rest } = user;
+    const updatedUser = await prisma.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        password,
+      },
+    });
 
-      return NextResponse.json({ data: rest, message: 'success' }, { status: 200 });
-    }
+    const data = {
+      id: updatedUser.id,
+      email: updatedUser.email,
+      name: updatedUser.name,
+    };
+
+    return NextResponse.json({ data, message: 'success' }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ message: 'failed to connect to db' }, { status: 400 });
   }
