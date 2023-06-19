@@ -26,6 +26,7 @@
     "packages.components.snackbar": "*",
     "packages.inputs.button": "*",
     "packages.inputs.input": "*",
+    "packages.inputs.tabs": "*",
     "packages.rhf.inputs.input": "*",
     "react": "18.2.0",
     "react-dom": "18.2.0",
