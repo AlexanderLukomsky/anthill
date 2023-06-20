@@ -2,55 +2,6 @@ import { getScheme } from 'theme.scheme';
 
 const { palette } = getScheme();
 
-export const textFieldStyle = {
-  default: {
-    '& .MuiInputBase-root': {
-      '&:before': {
-        borderColor: 'dark.300',
-      },
-      '&.MuiInput-root': {
-        '&:hover': {
-          '&:before': {
-            borderBottom: '2px solid',
-            borderColor: 'dark.100',
-          },
-        },
-      },
-      '&:after': {
-        border: 'none',
-      },
-    },
-    '& .MuiFormLabel-root': {
-      color: 'light.900',
-      '&.Mui-focused': {
-        color: 'light.900',
-      },
-    },
-  },
-  error: {
-    '& .MuiFormLabel-root': {
-      color: 'light.900',
-      '&.Mui-focused': {
-        color: 'light.900',
-      },
-    },
-    '& .MuiInputBase-root': {
-      '&:before': {
-        borderColor: 'danger.300',
-      },
-      '&:hover': {
-        '&:before': {
-          borderBottom: '2px solid',
-          borderColor: 'danger.300',
-        },
-      },
-      '&:after': {
-        border: 'none',
-      },
-    },
-  },
-};
-
 export const inputStyle = {
   default: {
     color: 'light.100',
@@ -62,6 +13,7 @@ export const inputStyle = {
       },
     },
   },
+
   error: {
     color: 'danger.300',
 
@@ -81,4 +33,69 @@ export const helperTextStyle = {
   error: {
     color: 'danger.300',
   },
+};
+
+export const getTextFieldStyle = (variant: 'standard' | 'outlined', error: boolean) => {
+  const borderColor = error ? 'danger.300' : 'dark.300';
+  const hoveredBorderColor = error ? 'danger.300' : 'dark.100';
+
+  if (variant === 'standard') {
+    return {
+      '& .MuiInputBase-root': {
+        '&:before': {
+          borderColor,
+        },
+        '&.MuiInput-root': {
+          '&:hover': {
+            '&:before': {
+              borderBottom: '2px solid',
+              borderBottomColor: hoveredBorderColor,
+            },
+          },
+        },
+        '&:after': {
+          border: 'none',
+        },
+      },
+    };
+  }
+
+  return {
+    '& .MuiFormLabel-root': {
+      position: 'relative',
+      transform: 'none',
+      top: 0,
+      color: 'light.900',
+      '&.Mui-focused': {
+        color: 'light.300',
+      },
+    },
+
+    '& .MuiInputBase-root': {
+      '&:hover': {
+        '& .MuiInputBase-input': {
+          borderColor: hoveredBorderColor,
+        },
+      },
+      '&.Mui-focused': {
+        '& .MuiInputBase-input': {
+          borderColor: hoveredBorderColor,
+        },
+      },
+      '& .MuiInputBase-input': {
+        border: '1px solid',
+        borderColor,
+        p: '6px 12px',
+        borderRadius: '2px',
+
+        '&.MuiOutlinedInput-input': {
+          '&::placeholder': {
+            color: 'light.900',
+          },
+        },
+      },
+
+      fieldset: { display: 'none' },
+    },
+  };
 };

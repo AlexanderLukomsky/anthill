@@ -15,6 +15,8 @@ export type InputWithHookFormProps<T extends FieldValues> = {
   error?: boolean;
   helperText?: string;
   sx?: SxProps;
+  variant?: 'standard' | 'outlined';
+  placeholder?: string;
   containerProps?: BoxProps;
 };
 
@@ -28,6 +30,8 @@ export const InputWithHookForm = <T extends FieldValues>({
   error,
   helperText,
   sx,
+  variant,
+  placeholder,
   containerProps,
 }: InputWithHookFormProps<T>) => {
   const {
@@ -56,6 +60,8 @@ export const InputWithHookForm = <T extends FieldValues>({
       error={error}
       helperText={helperText}
       sx={sx}
+      variant={variant}
+      placeholder={placeholder}
       containerProps={containerProps}
     />
   );

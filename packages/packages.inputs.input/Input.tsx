@@ -13,12 +13,13 @@ import {
 } from '@mui/material';
 import { EyeOnIconOutline } from 'packages.icons.eye-on-outline';
 import { EyeOffIconOutline } from 'packages.icons.eye-off-outline';
-import { helperTextStyle, inputStyle, textFieldStyle } from './style';
+import { getTextFieldStyle, helperTextStyle, inputStyle } from './style';
 
 import 'settings.config-muidts';
 
 export type InputProps = {
   type?: 'text' | 'password';
+  variant?: 'standard' | 'outlined';
   inputSx?: SxProps;
   containerProps?: BoxProps;
 } & Omit<TextFieldProps, 'multiline' | 'type' | 'variant' | 'InputProps'>;
@@ -29,8 +30,9 @@ export const Input: FC<InputProps> = ({
   label,
   helperText,
   type,
-  error,
+  error = false,
   containerProps = { sx: {} },
+  variant = 'standard',
   inputSx,
   ...props
 }) => {
@@ -40,6 +42,7 @@ export const Input: FC<InputProps> = ({
   const { sx, ...rest } = props;
 
   const currentType = show ? 'text' : type;
+  const currentTextFieldStyle = getTextFieldStyle(variant, error);
   const style = error ? 'error' : 'default';
 
   return (
@@ -47,11 +50,22 @@ export const Input: FC<InputProps> = ({
       <TextField
         label={label}
         type={currentType}
-        variant="standard"
+        variant={variant}
         value={value}
         onChange={onChange}
-        sx={{ width: '100%', ...textFieldStyle[style], ...sx }}
+        sx={{
+          '& .MuiFormLabel-root': {
+            color: 'light.900',
+            '&.Mui-focused': {
+              color: 'light.900',
+            },
+          },
+          width: '100%',
+          ...currentTextFieldStyle,
+          ...sx,
+        }}
         {...rest}
+        InputLabelProps={{ shrink: variant === 'outlined' ? true : undefined }}
         InputProps={{
           sx: { ...inputStyle[style] },
 
