@@ -3,3 +3,5 @@ export enum AccountPages {
   Devices = '/account/devices',
   Management = '/account/management',
 }
+
+export type AccountPagesPaths = (typeof AccountPages)[keyof typeof AccountPages];
