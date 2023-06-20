@@ -73,6 +73,7 @@
     "packages.icons.trash": "*",
     "packages.icons.trash-outline": "*",
     "packages.icons.trending-up": "*",
+    "packages.components.modal": "*",
     "packages.components.circular-progress": "*",
     "packages.components.snackbar": "*",
     "packages.inputs.button": "*",

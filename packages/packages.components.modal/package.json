@@ -1,5 +1,5 @@
 {
-  "name": "packages.components.snackbar",
+  "name": "packages.components.modal",
   "version": "0.0.0",
   "main": "./index.tsx",
   "types": "./index.tsx",
@@ -9,7 +9,9 @@
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.11.15",
     "settings.config-muidts": "*",
-    "theme.scheme": "*"
+    "theme.scheme": "*",
+    "packages.icons.close": "*",
+    "packages.components.circular-progress": "*"
   },
   "devDependencies": {
     "@types/node": "20.3.1",

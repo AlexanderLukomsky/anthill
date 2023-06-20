@@ -18,7 +18,7 @@ export const Example = ({ tabs }: TabsProps) => {
 };
 
 const meta: Meta<TabsProps> = {
-  title: 'UI/tabs',
+  title: 'UI/Tabs',
   component: Tabs,
   tags: ['autodocs'],
   parameters: {

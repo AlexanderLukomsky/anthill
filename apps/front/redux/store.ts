@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { authService } from 'services/auth/api';
 import { snackbarReducer } from './slices/snackbar';
+import { accountInformationReducer } from './slices/account-information';
 
 const rootReducer = combineReducers({
   snackbar: snackbarReducer,
+  accountInformation: accountInformationReducer,
   [authService.reducerPath]: authService.reducer,
 });
 

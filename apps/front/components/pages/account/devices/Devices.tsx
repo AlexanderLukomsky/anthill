@@ -1,3 +1,3 @@
-import { EmptyPage } from 'components/main/empty-page';
+import { EmptyPage } from 'components/empty-page';
 
 export const Devices = () => <EmptyPage />;

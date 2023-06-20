@@ -1,0 +1,1 @@
+export { AddAvatarModal } from './AddAvatarModal';
