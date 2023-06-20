@@ -1,5 +1,7 @@
 import * as yup from 'yup';
 
+//* Auth
+
 const email = yup.string().email('Invalid email address').required('Required');
 
 const password = yup
@@ -35,3 +37,17 @@ export type RegistrationSchema = yup.InferType<typeof registrationSchema>;
 export type SignInSchema = yup.InferType<typeof signInSchema>;
 
 export type NewPasswordSchema = yup.InferType<typeof newPasswordSchema>;
+
+//* Account
+
+const personal = yup.string().max(30, 'must be shorter than or equal to 30 characters');
+
+export const accountInformationSchema = yup.object().shape({
+  userName: personal,
+  firstName: personal,
+  lastName: personal,
+  city: yup.string().max(30, 'must be shorter than or equal to 30 characters'),
+  aboutMe: yup.string().max(200, 'must be shorter than or equal to 200 characters'),
+});
+
+export type AccountInformationSchema = yup.InferType<typeof accountInformationSchema>;
