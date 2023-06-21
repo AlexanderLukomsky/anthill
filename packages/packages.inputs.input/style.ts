@@ -2,8 +2,36 @@ import { getScheme } from 'theme.scheme';
 
 const { palette } = getScheme();
 
+export const labelStyle = {
+  standard: {
+    color: 'light.900',
+    '&.Mui-focused': {
+      color: 'light.900',
+    },
+  },
+  outlined: {
+    fontSize: '14px',
+    color: 'light.900',
+    position: 'relative',
+    transform: 'none',
+    top: 0,
+    '&.Mui-focused': {
+      color: 'light.900',
+    },
+  },
+};
+
+export const helperTextStyle = {
+  base: {
+    color: 'light.900',
+  },
+  error: {
+    color: 'danger.300',
+  },
+};
+
 export const inputStyle = {
-  default: {
+  base: {
     color: 'light.100',
 
     '&.MuiInputBase-root:has(> input:-webkit-autofill)': {
@@ -26,76 +54,82 @@ export const inputStyle = {
   },
 };
 
-export const helperTextStyle = {
-  default: {
-    color: 'light.900',
-  },
-  error: {
-    color: 'danger.300',
-  },
-};
-
-export const getTextFieldStyle = (variant: 'standard' | 'outlined', error: boolean) => {
-  const borderColor = error ? 'danger.300' : 'dark.300';
-  const hoveredBorderColor = error ? 'danger.300' : 'dark.100';
-
-  if (variant === 'standard') {
-    return {
-      '& .MuiInputBase-root': {
+export const inputVariantsStyle = {
+  standard: {
+    general: {
+      '&:after': {
+        border: 'none',
+      },
+    },
+    base: {
+      '&:before': {
+        borderColor: 'dark.300',
+      },
+      '&.MuiInputBase-root': {
+        '&:hover': {
+          '&:before': {
+            borderBottom: '2px solid',
+            borderBottomColor: 'dark.100',
+          },
+        },
+      },
+      '&.Mui-focused': {
         '&:before': {
-          borderColor,
+          borderBottom: '2px solid',
+          borderBottomColor: 'dark.100',
         },
-        '&.MuiInput-root': {
-          '&:hover': {
-            '&:before': {
-              borderBottom: '2px solid',
-              borderBottomColor: hoveredBorderColor,
-            },
-          },
-        },
-        '&:after': {
-          border: 'none',
-        },
-      },
-    };
-  }
-
-  return {
-    '& .MuiFormLabel-root': {
-      position: 'relative',
-      transform: 'none',
-      top: 0,
-      color: 'light.900',
-      '&.Mui-focused': {
-        color: 'light.300',
       },
     },
-
-    '& .MuiInputBase-root': {
-      '&:hover': {
-        '& .MuiInputBase-input': {
-          borderColor: hoveredBorderColor,
-        },
+    error: {
+      '&:before': {
+        borderColor: 'danger.300',
       },
-      '&.Mui-focused': {
-        '& .MuiInputBase-input': {
-          borderColor: hoveredBorderColor,
-        },
-      },
-      '& .MuiInputBase-input': {
-        border: '1px solid',
-        borderColor,
-        p: '6px 12px',
-        borderRadius: '2px',
-
-        '&.MuiOutlinedInput-input': {
-          '&::placeholder': {
-            color: 'light.900',
+      '&.MuiInputBase-root': {
+        '&:hover': {
+          '&:before': {
+            borderBottom: '2px solid',
+            borderBottomColor: 'danger.300',
           },
         },
       },
-
+      '&.Mui-focused': {
+        '&:before': {
+          borderBottom: '2px solid',
+          borderBottomColor: 'danger.300',
+        },
+      },
+    },
+  },
+  outlined: {
+    general: {
+      border: '1px solid',
+      borderRadius: '2px',
       fieldset: { display: 'none' },
+      '& .MuiOutlinedInput-input': {
+        p: '6px 12px',
+        '&::placeholder': {
+          color: 'light.900',
+        },
+      },
     },
-  };
+
+    base: {
+      borderColor: 'dark.300',
+      '&:hover': {
+        borderColor: 'dark.100',
+      },
+      '&.Mui-focused': {
+        borderColor: 'dark.100',
+      },
+    },
+    error: {
+      borderColor: 'danger.300',
+      '&:hover': {
+        borderColor: 'danger.300',
+      },
+      '&.Mui-focused': {
+        borderColor: 'danger.300',
+      },
+    },
+  },
 };

@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import { EyeOnIconOutline } from 'packages.icons.eye-on-outline';
 import { EyeOffIconOutline } from 'packages.icons.eye-off-outline';
-import { getTextFieldStyle, helperTextStyle, inputStyle } from './style';
+import { helperTextStyle, inputStyle, inputVariantsStyle, labelStyle } from './style';
 
 import 'settings.config-muidts';
 
@@ -39,11 +39,10 @@ export const Input: FC<InputProps> = ({
   const [show, setShow] = useState(false);
   const { sx: containerSx, ...restContainerProps } = containerProps;
 
-  const { sx, ...rest } = props;
+  const { sx, ...restProps } = props;
 
   const currentType = show ? 'text' : type;
-  const currentTextFieldStyle = getTextFieldStyle(variant, error);
-  const style = error ? 'error' : 'default';
+  const style = error ? 'error' : 'base';
 
   return (
     <Box sx={containerSx} {...restContainerProps}>
@@ -54,20 +53,19 @@ export const Input: FC<InputProps> = ({
         value={value}
         onChange={onChange}
         sx={{
-          '& .MuiFormLabel-root': {
-            color: 'light.900',
-            '&.Mui-focused': {
-              color: 'light.900',
-            },
-          },
           width: '100%',
-          ...currentTextFieldStyle,
           ...sx,
         }}
-        {...rest}
-        InputLabelProps={{ shrink: variant === 'outlined' ? true : undefined }}
+        InputLabelProps={{
+          sx: { ...labelStyle[variant] },
+          shrink: variant === 'outlined' ? true : undefined,
+        }}
         InputProps={{
-          sx: { ...inputStyle[style] },
+          sx: {
+            ...inputStyle[style],
+            ...inputVariantsStyle[variant].general,
+            ...inputVariantsStyle[variant][style],
+          },
 
           endAdornment: type === 'password' && (
             <InputAdornment position="end">
@@ -79,6 +77,7 @@ export const Input: FC<InputProps> = ({
             </InputAdornment>
           ),
         }}
+        {...restProps}
       />
 
       {helperText !== undefined && (
