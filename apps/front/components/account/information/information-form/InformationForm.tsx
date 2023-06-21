@@ -2,7 +2,8 @@ import styled from '@emotion/styled';
 import { AccountInformationSchema } from 'common/validation';
 import { InputWithHookForm } from 'packages.rhf.inputs.input';
 import { FC } from 'react';
-import { Control, FieldErrors } from 'react-hook-form';
+import { Control, Controller, FieldErrors } from 'react-hook-form';
+import { TextArea } from 'packages.inputs.text-area';
 
 const Form = styled.form`
   display: flex;
@@ -56,6 +57,19 @@ export const InformationForm: FC<InformationFormProps> = ({ control, errors }) =
       helperText={errors.city?.message || ''}
     />
 
-    <div style={{ color: 'white' }}>About Me</div>
+    <Controller
+      control={control}
+      render={({ field: { onChange, onBlur, value } }) => (
+        <TextArea
+          label="About Me"
+          onBlur={onBlur}
+          onChange={onChange}
+          value={value}
+          error={!!errors.aboutMe}
+          helperText={errors.aboutMe?.message || ''}
+        />
+      )}
+      name="aboutMe"
+    />
   </Form>
 );
