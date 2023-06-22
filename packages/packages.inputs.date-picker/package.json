@@ -1,15 +1,18 @@
 {
-  "name": "packages.inputs.button",
+  "name": "packages.inputs.date-picker",
   "version": "0.0.0",
   "main": "./index.tsx",
   "types": "./index.tsx",
   "dependencies": {
     "react": "18.2.0",
-    "@emotion/react": "^11.10.6",
-    "@emotion/styled": "^11.10.6",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.11.15",
+    "@mui/x-date-pickers": "^6.8.0",
     "settings.config-muidts": "*",
-    "theme.scheme": "*"
+    "packages.icons.calendar-outline": "*",
+    "theme.scheme": "*",
+    "dayjs": "^1.11.8"
   },
   "devDependencies": {
     "@types/node": "20.3.1",
