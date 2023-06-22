@@ -20,6 +20,7 @@ export const Information = () => {
       lastName: '',
       city: '',
       aboutMe: '',
+      birthday: null,
     },
     resolver: yupResolver(accountInformationSchema),
   });

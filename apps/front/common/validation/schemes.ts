@@ -43,6 +43,7 @@ export type NewPasswordSchema = yup.InferType<typeof newPasswordSchema>;
 const personal = yup.string().max(30, 'must be shorter than or equal to 30 characters');
 
 export const accountInformationSchema = yup.object().shape({
+  birthday: yup.string().nullable(),
   userName: personal,
   firstName: personal,
   lastName: personal,

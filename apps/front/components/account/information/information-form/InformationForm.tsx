@@ -1,9 +1,11 @@
 import styled from '@emotion/styled';
 import { AccountInformationSchema } from 'common/validation';
 import { InputWithHookForm } from 'packages.rhf.inputs.input';
+import { DatePicker } from 'packages.inputs.date-picker';
 import { FC } from 'react';
 import { Control, Controller, FieldErrors } from 'react-hook-form';
 import { TextArea } from 'packages.inputs.text-area';
+import { Box } from 'lib/mui';
 
 const Form = styled.form`
   display: flex;
@@ -46,7 +48,15 @@ export const InformationForm: FC<InformationFormProps> = ({ control, errors }) =
       helperText={errors.lastName?.message || ''}
     />
 
-    <div style={{ color: 'white' }}>Date of birthday</div>
+    <Controller
+      control={control}
+      render={({ field: { onChange, onBlur, value } }) => (
+        <Box sx={{ mb: '18px' }}>
+          <DatePicker value={value} onChange={onChange} label="Date of birthday" />
+        </Box>
+      )}
+      name="birthday"
+    />
 
     <InputWithHookForm
       control={control}
