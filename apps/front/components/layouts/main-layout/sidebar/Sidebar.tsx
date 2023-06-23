@@ -7,6 +7,8 @@ import { PersonOutlineIcon } from 'packages.icons.person-outline';
 import { SearchIcon } from 'packages.icons.search';
 import { LogOutIcon } from 'packages.icons.log-out';
 import { Button } from 'packages.inputs.button';
+import { useAppDispatch } from 'redux/hooks';
+import { setIsOpenLogoutModal } from 'redux/slices/app';
 import { SidebarItem } from './sidebar-item/SidebarItem';
 
 const items = [
@@ -17,8 +19,10 @@ const items = [
 ];
 
 export const Sidebar = () => {
+  const dispatch = useAppDispatch();
+
   const handleLogoutClick = () => {
-    console.log('log out');
+    dispatch(setIsOpenLogoutModal(true));
   };
 
   return (
