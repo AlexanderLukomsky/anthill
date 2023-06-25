@@ -21,6 +21,7 @@ export default function Home() {
       <Stack>
         <TempList arr={auth} />
         <TempList arr={account} />
+        <TempList arr={[{ path: 'video', title: 'Video' }]} />
       </Stack>
     </main>
   );
