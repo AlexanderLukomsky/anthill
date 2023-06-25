@@ -1,5 +1,6 @@
-import { Box, IconButton, Slider, Stack, Typography } from '@mui/material';
+import { IconButton, Slider, Stack, Typography } from '@mui/material';
 import { FC } from 'react';
+import { PauseSharp } from '@mui/icons-material';
 import { IconPlay, MaximizeIcon, MinimizeIcon } from './Icons';
 import { VolumeControl } from './VolumeControl';
 
@@ -36,41 +37,44 @@ export const Controls: FC<ControlsProps> = ({
 }) => (
   <Stack
     sx={{
+      bgcolor: 'rgba(16, 16, 16, 0.40)',
+      p: '16px',
       position: 'absolute',
-      bottom: 0,
-      left: 0,
-      right: 0,
+      bottom: '32px',
+      left: '50%',
+      transform: 'translateX(-50%)',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
       zIndex: 2,
+      gap: '8px',
+      borderRadius: '8px',
+      maxWidth: '638px',
+      width: '100%',
     }}
   >
-    <IconButton onClick={onToggleScreenMode}>
-      {isFullScreen && <MinimizeIcon />}
-      {!isFullScreen && <MaximizeIcon />}
-    </IconButton>
-
-    {!playing && (
-      <IconButton onClick={onTogglePlay}>
-        <IconPlay />
+    <Stack direction="row" sx={{ gap: '16px' }}>
+      <IconButton sx={{ width: '24px', height: '24px', p: 0 }} onClick={onTogglePlay}>
+        {!playing && <IconPlay />}
+        {playing && <PauseSharp sx={{ color: 'white' }} />}
       </IconButton>
-    )}
 
-    {playing && (
-      <IconButton sx={{ color: 'white' }} onClick={onTogglePlay}>
-        pause
+      <VolumeControl
+        muted={muted}
+        volume={volume}
+        onChange={onVolumeChange}
+        onToggleMute={onToggleMute}
+      />
+
+      <IconButton sx={{ width: '24px', height: '24px', p: 0 }} onClick={onToggleScreenMode}>
+        {isFullScreen && <MinimizeIcon />}
+        {!isFullScreen && <MaximizeIcon />}
       </IconButton>
-    )}
+    </Stack>
 
-    <VolumeControl
-      muted={muted}
-      volume={volume}
-      onChange={onVolumeChange}
-      onToggleMute={onToggleMute}
-    />
+    <Stack direction="row" alignItems="center" sx={{ gap: '16px' }}>
+      <Typography style={{ color: 'white' }}>{playedTime}</Typography>
 
-    <Box>
       <Slider
         min={0}
         max={movieDuration}
@@ -79,8 +83,8 @@ export const Controls: FC<ControlsProps> = ({
         size="small"
         onChange={onCurrentPlayerTimeChange}
       />
-      <Typography style={{ color: 'white' }}>{playedTime}</Typography>
+
       <Typography style={{ color: 'white' }}>{fullMovieTime}</Typography>
-    </Box>
+    </Stack>
   </Stack>
 );

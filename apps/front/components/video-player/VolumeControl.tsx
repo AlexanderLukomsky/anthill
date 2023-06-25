@@ -22,7 +22,7 @@ export const VolumeControl: FC<VolumeControlProps> = ({
 
   return (
     <Box
-      sx={{ position: 'relative', maxWidth: 'max-content' }}
+      sx={{ position: 'relative', maxWidth: 'max-content', ml: 'auto' }}
       onMouseEnter={() => {
         setIsShow(true);
       }}
@@ -30,7 +30,7 @@ export const VolumeControl: FC<VolumeControlProps> = ({
         setIsShow(false);
       }}
     >
-      <IconButton onClick={onToggleMute}>
+      <IconButton onClick={onToggleMute} sx={{ width: '24px', height: '24px', p: 0 }}>
         {!muted && <SoundOnIcon />}
         {muted && <VolumeOff style={{ color: 'white' }} />}
       </IconButton>
@@ -45,7 +45,8 @@ export const VolumeControl: FC<VolumeControlProps> = ({
             position: 'absolute',
             top: '-149px',
             p: '10px 5px',
-            right: 0,
+            left: '50%',
+            transform: 'translateX(-50%)',
             height: '150px',
           }}
         >
