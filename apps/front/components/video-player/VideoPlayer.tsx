@@ -1,12 +1,12 @@
 'use client';
 
-import { Box, IconButton, Slider, Stack, Typography } from '@mui/material';
-import { Button } from 'packages.inputs.button';
+import { Box, Stack } from '@mui/material';
 import { FC, useEffect, useRef, useState } from 'react';
 import ReactPlayer from 'react-player';
 import { OnProgressProps } from 'react-player/base';
 import screenfull from 'screenfull';
-import { IconPlay, MaximizeIcon, MinimizeIcon } from './Icons';
+
+import { Controls } from './Controls';
 
 export type VideoPlayerProps = {};
 
@@ -16,28 +16,44 @@ export const VideoPlayer: FC<VideoPlayerProps> = () => {
 
   const [currentPlayerTime, setCurrentPlayerTime] = useState(0);
 
-  const [render, setRender] = useState(0);
-  console.log(render);
+  const [, setRender] = useState(0);
 
   const [playing, setPlaying] = useState(false);
   const [volume, setVolume] = useState(0.5);
   const [muted, setMuted] = useState(false);
 
-  const handleFullScreenMode = () => {
+  const handleToggleScreenMode = () => {
     screenfull.toggle(containerPlayerRef.current);
+
     screenfull.onchange(() => {
       setRender((prev) => prev + 1);
     });
+  };
+
+  const handleTogglePlay = () => {
+    setPlaying((play) => !play);
+  };
+
+  const handleToggleMute = () => {
+    setMuted((muted) => !muted);
+  };
+
+  const handleVolumeChange = (event: Event, value: number) => {
+    setVolume(value);
+  };
+
+  const handlePlayerTimeChange = (event: Event, value: number) => {
+    playerRef.current.seekTo(value + 1);
+    setCurrentPlayerTime(value);
   };
 
   const handlePlayerProgress = (player: OnProgressProps) => {
     setRender((prev) => prev + 1);
 
     setCurrentPlayerTime(playerRef.current.getCurrentTime());
-    console.log('onProgress');
   };
 
-  const movieDuration = playerRef.current ? playerRef.current.getDuration() : '00:00';
+  const movieDuration = playerRef.current ? playerRef.current.getDuration() : 0;
   const playedTime = format(currentPlayerTime);
   const fullMovieTime = format(movieDuration);
 
@@ -47,7 +63,6 @@ export const VideoPlayer: FC<VideoPlayerProps> = () => {
       setHasWindow(true);
     }
   }, []);
-  console.log(screenfull.isFullscreen);
 
   return (
     <Stack sx={{ background: '#404040' }}>
@@ -67,62 +82,21 @@ export const VideoPlayer: FC<VideoPlayerProps> = () => {
             onProgress={handlePlayerProgress}
           />
         )}
-        <Stack
-          sx={{
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            zIndex: 2,
-          }}
-        >
-          <IconButton onClick={handleFullScreenMode}>
-            {screenfull.isFullscreen && <MinimizeIcon />}
-            {!screenfull.isFullscreen && <MaximizeIcon />}
-          </IconButton>
-
-          {!playing && (
-            <IconButton onClick={() => setPlaying(true)}>
-              <IconPlay />
-            </IconButton>
-          )}
-          {playing && <Button onClick={() => setPlaying(false)}>pause</Button>}
-          {!muted && <Button onClick={() => setMuted(true)}>muted</Button>}
-          {muted && <Button onClick={() => setMuted(false)}>unmuted</Button>}
-
-          <Box sx={{ height: '150px', position: 'absolute' }}>
-            <Slider
-              orientation="vertical"
-              min={0}
-              max={1}
-              value={volume}
-              step={0.01}
-              size="small"
-              onChange={(event, value) => {
-                setVolume(value as number);
-              }}
-            />
-          </Box>
-          <Box>
-            <Slider
-              min={0}
-              max={movieDuration}
-              value={currentPlayerTime}
-              step={0.01}
-              size="small"
-              onChange={(event, value) => {
-                console.log(value);
-                setCurrentPlayerTime((value as number) + 1);
-                playerRef.current.seekTo((value as number) + 1);
-              }}
-            />
-            <Typography style={{ color: 'white' }}>{playedTime}</Typography>
-            <Typography style={{ color: 'white' }}>{fullMovieTime}</Typography>
-          </Box>
-        </Stack>
+        <Controls
+          isFullScreen={screenfull.isFullscreen}
+          playing={playing}
+          playedTime={playedTime}
+          fullMovieTime={fullMovieTime}
+          muted={muted}
+          volume={volume}
+          movieDuration={movieDuration}
+          currentPlayerTime={currentPlayerTime}
+          onToggleScreenMode={handleToggleScreenMode}
+          onTogglePlay={handleTogglePlay}
+          onToggleMute={handleToggleMute}
+          onVolumeChange={handleVolumeChange}
+          onCurrentPlayerTimeChange={handlePlayerTimeChange}
+        />
       </Box>
     </Stack>
   );
