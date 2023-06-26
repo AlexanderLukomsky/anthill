@@ -1,7 +1,8 @@
-import { Box, IconButton, Slider } from '@mui/material';
+import { Box, IconButton, Stack } from '@mui/material';
 import { FC, useRef, useState } from 'react';
 import { VolumeOff } from '@mui/icons-material';
 import { SoundOnIcon } from './Icons';
+import { Range } from './Range';
 
 type VolumeControlProps = {
   muted: boolean;
@@ -40,25 +41,41 @@ export const VolumeControl: FC<VolumeControlProps> = ({
           onMouseOver={() => {
             setIsShow(true);
           }}
-          ref={sliderRef}
           sx={{
             position: 'absolute',
-            top: '-149px',
-            p: '10px 5px',
+            top: '-190px',
             left: '50%',
             transform: 'translateX(-50%)',
-            height: '150px',
+            height: '190px',
+            width: '36px',
+            bgcolor: 'transparent',
+            borderRadius: '8px',
           }}
         >
-          <Slider
-            orientation="vertical"
-            min={0}
-            max={1}
-            value={volume}
-            step={0.01}
-            size="small"
-            onChange={onChange}
-          />
+          <Stack
+            alignItems="center"
+            ref={sliderRef}
+            sx={{
+              position: 'absolute',
+              top: '0',
+              p: '16px 0',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              height: '182px',
+              width: '36px',
+              bgcolor: 'rgba(16, 16, 16, 0.40);',
+              borderRadius: '8px',
+            }}
+          >
+            <Range
+              orientation="vertical"
+              min={0}
+              max={1}
+              value={volume}
+              step={0.01}
+              onChange={onChange}
+            />
+          </Stack>
         </Box>
       )}
     </Box>

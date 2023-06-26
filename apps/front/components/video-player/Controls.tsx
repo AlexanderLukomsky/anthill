@@ -1,8 +1,9 @@
-import { IconButton, Slider, Stack, Typography } from '@mui/material';
+import { IconButton, Stack, Typography } from '@mui/material';
 import { FC } from 'react';
 import { PauseSharp } from '@mui/icons-material';
 import { IconPlay, MaximizeIcon, MinimizeIcon } from './Icons';
 import { VolumeControl } from './VolumeControl';
+import { Range } from './Range';
 
 type ControlsProps = {
   isFullScreen: boolean;
@@ -39,14 +40,14 @@ export const Controls: FC<ControlsProps> = ({
     sx={{
       bgcolor: 'rgba(16, 16, 16, 0.40)',
       p: '16px',
-      position: 'absolute',
+      position: 'fixed',
       bottom: '32px',
       left: '50%',
       transform: 'translateX(-50%)',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
-      zIndex: 2,
+      zIndex: 1000,
       gap: '8px',
       borderRadius: '8px',
       maxWidth: '638px',
@@ -75,12 +76,11 @@ export const Controls: FC<ControlsProps> = ({
     <Stack direction="row" alignItems="center" sx={{ gap: '16px' }}>
       <Typography style={{ color: 'white' }}>{playedTime}</Typography>
 
-      <Slider
+      <Range
         min={0}
         max={movieDuration}
         value={currentPlayerTime}
         step={0.01}
-        size="small"
         onChange={onCurrentPlayerTimeChange}
       />
 

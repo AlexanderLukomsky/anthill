@@ -1,12 +1,21 @@
 'use client';
 
-import { Box, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 import { FC, useEffect, useRef, useState } from 'react';
 import ReactPlayer from 'react-player';
 import { OnProgressProps } from 'react-player/base';
 import screenfull from 'screenfull';
-
+import { styled } from '@mui/material/styles';
 import { Controls } from './Controls';
+import { CloseButton } from './CloseButton';
+
+const Player = styled(ReactPlayer)({
+  '& video': {
+    position: 'absolute',
+    width: '1251px !important',
+    height: '704px !important',
+  },
+});
 
 export type VideoPlayerProps = {};
 
@@ -65,21 +74,44 @@ export const VideoPlayer: FC<VideoPlayerProps> = () => {
   }, []);
 
   return (
-    <Stack sx={{ background: '#404040' }}>
-      <Box
+    <Stack
+      alignItems="center"
+      justifyContent="center"
+      sx={{
+        bgcolor: 'rgba(255, 255, 255, 0.3)',
+        height: '100vh',
+        position: 'relative',
+      }}
+    >
+      <Stack
         ref={containerPlayerRef}
-        sx={{ maxWidth: '1250px', width: '100%', height: '100vh', position: 'relative' }}
+        sx={{
+          maxWidth: '1250px',
+          width: '100%',
+          height: '700px',
+          overflow: 'hidden',
+          position: 'relative',
+        }}
       >
+        <CloseButton onClick={() => {}} />
+
         {hasWindow && (
-          <ReactPlayer
-            width="100%"
-            height="100%"
+          <Player
             ref={playerRef}
-            url="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"
+            url="https://www.youtube.com/watch?v=EH1qaUQn6ug"
             playing={playing}
             volume={volume}
             muted={muted}
             onProgress={handlePlayerProgress}
+            controls={false}
+            width="100%"
+            height="100%"
+            onPlay={() => {
+              setPlaying(true);
+            }}
+            onPause={() => {
+              setPlaying(false);
+            }}
           />
         )}
         <Controls
@@ -97,7 +129,7 @@ export const VideoPlayer: FC<VideoPlayerProps> = () => {
           onVolumeChange={handleVolumeChange}
           onCurrentPlayerTimeChange={handlePlayerTimeChange}
         />
-      </Box>
+      </Stack>
     </Stack>
   );
 };
