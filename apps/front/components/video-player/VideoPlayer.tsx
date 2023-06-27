@@ -20,8 +20,8 @@ const initialPlayerState = {
 };
 
 export const VideoPlayer: FC<VideoPlayerProps> = () => {
-  const playerRef = useRef(null);
-  const containerPlayerRef = useRef(null);
+  const playerRef = useRef<ReactPlayer | null>(null);
+  const containerPlayerRef = useRef<HTMLDivElement | null>(null);
 
   const [{ volume, muted, playing, currentPlayerTime, seeking }, setPlayerState] =
     useState(initialPlayerState);
@@ -76,6 +76,7 @@ export const VideoPlayer: FC<VideoPlayerProps> = () => {
   const movieDuration = playerRef.current ? playerRef.current.getDuration() : 0;
 
   const [hasWindow, setHasWindow] = useState(false);
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setHasWindow(true);
@@ -95,6 +96,7 @@ export const VideoPlayer: FC<VideoPlayerProps> = () => {
       <Stack
         ref={containerPlayerRef}
         sx={{
+          zIndex: 1000,
           maxWidth: '1250px',
           width: '100%',
           height: '700px',
@@ -109,7 +111,7 @@ export const VideoPlayer: FC<VideoPlayerProps> = () => {
         {hasWindow && (
           <ReactPlayer
             ref={playerRef}
-            url="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"
+            url="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4"
             playing={playing}
             volume={volume}
             muted={muted}

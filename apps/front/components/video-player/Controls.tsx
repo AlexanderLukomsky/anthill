@@ -10,7 +10,7 @@ type ControlsProps = {
   playing: boolean;
   muted: boolean;
   volume: number;
-  movieDuration: any;
+  movieDuration: number;
   currentPlayerTime: number;
   onPlay: () => void;
   onPause: () => void;
@@ -106,6 +106,10 @@ export const Controls: FC<ControlsProps> = ({
 };
 
 const formatTime = (duration: number) => {
+  if (duration === 0) {
+    return '00:00';
+  }
+
   const minutes = Math.floor(duration / 60);
   const seconds = Math.floor(duration - minutes * 60);
 
