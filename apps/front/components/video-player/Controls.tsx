@@ -8,83 +8,111 @@ import { Range } from './Range';
 type ControlsProps = {
   isFullScreen: boolean;
   playing: boolean;
-  playedTime: any;
-  fullMovieTime: any;
-  muted: any;
+  muted: boolean;
   volume: number;
   movieDuration: any;
-  currentPlayerTime: any;
+  currentPlayerTime: number;
+  onPlay: () => void;
+  onPause: () => void;
+  onMute: () => void;
+  onUnmute: () => void;
   onToggleScreenMode: () => void;
-  onTogglePlay: () => void;
-  onToggleMute: () => void;
   onVolumeChange: (event: Event, value: number) => void;
-  onCurrentPlayerTimeChange: (event: Event, value: number) => void;
+  onPlayerTimeChange: (event: Event, value: number) => void;
+  onPlayerTimeChangeCommitted: () => void;
 };
 
 export const Controls: FC<ControlsProps> = ({
   isFullScreen,
   playing,
-  playedTime,
-  fullMovieTime,
   muted,
   volume,
   movieDuration,
   currentPlayerTime,
+  onPlay,
+  onPause,
+  onMute,
+  onUnmute,
   onToggleScreenMode,
-  onTogglePlay,
-  onToggleMute,
   onVolumeChange,
-  onCurrentPlayerTimeChange,
-}) => (
-  <Stack
-    sx={{
-      bgcolor: 'rgba(16, 16, 16, 0.40)',
-      p: '16px',
-      position: 'fixed',
-      bottom: '32px',
-      left: '50%',
-      transform: 'translateX(-50%)',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-between',
-      zIndex: 1000,
-      gap: '8px',
-      borderRadius: '8px',
-      maxWidth: '638px',
-      width: '100%',
-    }}
-  >
-    <Stack direction="row" sx={{ gap: '16px' }}>
-      <IconButton sx={{ width: '24px', height: '24px', p: 0 }} onClick={onTogglePlay}>
-        {!playing && <IconPlay />}
-        {playing && <PauseSharp sx={{ color: 'white' }} />}
-      </IconButton>
+  onPlayerTimeChange,
+  onPlayerTimeChangeCommitted,
+}) => {
+  const formattedCurrentPlayerTime = formatTime(currentPlayerTime);
+  const formattedMovieDuration = formatTime(movieDuration);
 
-      <VolumeControl
-        muted={muted}
-        volume={volume}
-        onChange={onVolumeChange}
-        onToggleMute={onToggleMute}
-      />
+  return (
+    <Stack
+      sx={{
+        bgcolor: 'rgba(16, 16, 16, 0.40)',
+        p: '16px',
+        position: 'fixed',
+        bottom: '32px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        zIndex: 1000,
+        gap: '8px',
+        borderRadius: '8px',
+        maxWidth: '638px',
+        width: '100%',
+      }}
+    >
+      <Stack direction="row" sx={{ gap: '16px' }}>
+        {!playing && (
+          <IconButton sx={{ width: '24px', height: '24px', p: 0 }} onClick={onPlay}>
+            <IconPlay />
+          </IconButton>
+        )}
 
-      <IconButton sx={{ width: '24px', height: '24px', p: 0 }} onClick={onToggleScreenMode}>
-        {isFullScreen && <MinimizeIcon />}
-        {!isFullScreen && <MaximizeIcon />}
-      </IconButton>
+        {playing && (
+          <IconButton sx={{ width: '24px', height: '24px', p: 0 }} onClick={onPause}>
+            <PauseSharp sx={{ color: 'white' }} />
+          </IconButton>
+        )}
+
+        <VolumeControl
+          muted={muted}
+          volume={volume}
+          onChange={onVolumeChange}
+          onMute={onMute}
+          onUnmute={onUnmute}
+        />
+
+        <IconButton sx={{ width: '24px', height: '24px', p: 0 }} onClick={onToggleScreenMode}>
+          {isFullScreen && <MinimizeIcon />}
+          {!isFullScreen && <MaximizeIcon />}
+        </IconButton>
+      </Stack>
+
+      <Stack direction="row" alignItems="center" sx={{ gap: '16px' }}>
+        <Typography style={{ color: 'white' }}>{formattedCurrentPlayerTime}</Typography>
+
+        <Range
+          min={0}
+          max={movieDuration}
+          value={currentPlayerTime}
+          step={0.01}
+          onChange={onPlayerTimeChange}
+          onChangeCommitted={onPlayerTimeChangeCommitted}
+        />
+
+        <Typography style={{ color: 'white' }}>{formattedMovieDuration}</Typography>
+      </Stack>
     </Stack>
+  );
+};
 
-    <Stack direction="row" alignItems="center" sx={{ gap: '16px' }}>
-      <Typography style={{ color: 'white' }}>{playedTime}</Typography>
+const formatTime = (duration: number) => {
+  const minutes = Math.floor(duration / 60);
+  const seconds = Math.floor(duration - minutes * 60);
 
-      <Range
-        min={0}
-        max={movieDuration}
-        value={currentPlayerTime}
-        step={0.01}
-        onChange={onCurrentPlayerTimeChange}
-      />
+  const format = (time: number) => (time < 10 ? `0${time}` : `${time}`);
 
-      <Typography style={{ color: 'white' }}>{fullMovieTime}</Typography>
-    </Stack>
-  </Stack>
-);
+  const formattedSeconds = format(seconds);
+  const formattedMinutes = format(minutes);
+
+  return `${formattedMinutes}:${formattedSeconds}`;
+};

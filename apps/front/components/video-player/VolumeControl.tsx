@@ -8,14 +8,16 @@ type VolumeControlProps = {
   muted: boolean;
   volume: number;
   onChange: (event: Event, value: number) => void;
-  onToggleMute: () => void;
+  onMute: () => void;
+  onUnmute: () => void;
 };
 
 export const VolumeControl: FC<VolumeControlProps> = ({
   muted,
   volume,
   onChange,
-  onToggleMute,
+  onMute,
+  onUnmute,
 }) => {
   const sliderRef = useRef<HTMLDivElement | null>(null);
 
@@ -31,10 +33,17 @@ export const VolumeControl: FC<VolumeControlProps> = ({
         setIsShow(false);
       }}
     >
-      <IconButton onClick={onToggleMute} sx={{ width: '24px', height: '24px', p: 0 }}>
-        {!muted && <SoundOnIcon />}
-        {muted && <VolumeOff style={{ color: 'white' }} />}
-      </IconButton>
+      {!muted && (
+        <IconButton onClick={onMute} sx={{ width: '24px', height: '24px', p: 0 }}>
+          <SoundOnIcon />
+        </IconButton>
+      )}
+
+      {muted && (
+        <IconButton onClick={onUnmute} sx={{ width: '24px', height: '24px', p: 0 }}>
+          <VolumeOff style={{ color: 'white' }} />
+        </IconButton>
+      )}
 
       {isShow && (
         <Box

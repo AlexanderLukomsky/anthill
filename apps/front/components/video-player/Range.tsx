@@ -8,9 +8,18 @@ type RangeProps = {
   step?: number;
   orientation?: 'horizontal' | 'vertical';
   onChange: (event: Event, value: number) => void;
+  onChangeCommitted?: (event: Event, value: number) => void;
 };
 
-export const Range: FC<RangeProps> = ({ min, max, value, step, orientation, onChange }) => (
+export const Range: FC<RangeProps> = ({
+  min,
+  max,
+  value,
+  step,
+  orientation,
+  onChange,
+  onChangeCommitted,
+}) => (
   <Slider
     sx={{
       '& .MuiSlider-thumb': {
@@ -33,5 +42,6 @@ export const Range: FC<RangeProps> = ({ min, max, value, step, orientation, onCh
     orientation={orientation}
     size="small"
     onChange={onChange}
+    onChangeCommitted={onChangeCommitted}
   />
 );
