@@ -1,7 +1,6 @@
 import { Box, IconButton, Stack } from '@mui/material';
 import { FC, useRef, useState } from 'react';
-import { VolumeOff } from '@mui/icons-material';
-import { SoundOnIcon } from './Icons';
+import { SoundOnIcon, VolumeOffIcon } from './Icons';
 import { Range } from './Range';
 
 type VolumeControlProps = {
@@ -41,7 +40,7 @@ export const VolumeControl: FC<VolumeControlProps> = ({
 
       {muted && (
         <IconButton onClick={onUnmute} sx={{ width: '24px', height: '24px', p: 0 }}>
-          <VolumeOff style={{ color: 'white' }} />
+          <VolumeOffIcon />
         </IconButton>
       )}
 

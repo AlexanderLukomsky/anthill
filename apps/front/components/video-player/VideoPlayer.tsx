@@ -29,11 +29,13 @@ export const VideoPlayer: FC<VideoPlayerProps> = () => {
   const [isFullScreen, setIsFullScreen] = useState(false);
 
   const handleToggleScreenMode = () => {
-    screenfull.toggle(containerPlayerRef.current);
+    if (containerPlayerRef.current) {
+      screenfull.toggle(containerPlayerRef.current);
 
-    screenfull.onchange(() => {
-      setIsFullScreen(screenfull.isFullscreen);
-    });
+      screenfull.onchange(() => {
+        setIsFullScreen(screenfull.isFullscreen);
+      });
+    }
   };
 
   const handlePlay = () => {
@@ -60,7 +62,7 @@ export const VideoPlayer: FC<VideoPlayerProps> = () => {
   };
 
   const handlePlayerTimeChange = (event: Event, value: number) => {
-    playerRef.current.seekTo(value - 0.01);
+    playerRef.current?.seekTo(value - 0.01);
     setPlayerState((prev) => ({ ...prev, currentPlayerTime: value, seeking: true }));
   };
 

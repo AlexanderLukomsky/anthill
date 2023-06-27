@@ -34,14 +34,15 @@ export const AddAvatarModal: FC<AddAvatarModalProps> = ({
 
   const handleChangeUploadImage = (event: ChangeEvent<HTMLInputElement>) => {
     const { files } = event.currentTarget;
+    if (files) {
+      const file = files[0];
 
-    const file = files[0];
+      convertFileToBase64(file, (image) => {
+        dispatch(setPreviewImage(image.src));
+      });
 
-    convertFileToBase64(file, (image) => {
-      dispatch(setPreviewImage(image.src));
-    });
-
-    event.currentTarget.value = '';
+      event.currentTarget.value = '';
+    }
   };
 
   const handleClose = () => {

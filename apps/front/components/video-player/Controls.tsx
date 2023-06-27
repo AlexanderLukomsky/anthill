@@ -1,7 +1,6 @@
 import { IconButton, Stack, Typography } from '@mui/material';
 import { FC } from 'react';
-import { PauseSharp } from '@mui/icons-material';
-import { IconPlay, MaximizeIcon, MinimizeIcon } from './Icons';
+import { IconPlay, MaximizeIcon, MinimizeIcon, PauseIcon } from './Icons';
 import { VolumeControl } from './VolumeControl';
 import { Range } from './Range';
 
@@ -69,7 +68,7 @@ export const Controls: FC<ControlsProps> = ({
 
         {playing && (
           <IconButton sx={{ width: '24px', height: '24px', p: 0 }} onClick={onPause}>
-            <PauseSharp sx={{ color: 'white' }} />
+            <PauseIcon />
           </IconButton>
         )}
 

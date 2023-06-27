@@ -16,7 +16,7 @@ export const slice = createSlice({
     setIsOpenModal: (state, action: PayloadAction<boolean>) => {
       state.avatar.isOpenModal = action.payload;
     },
-    setPreviewImage: (state, action: PayloadAction<string>) => {
+    setPreviewImage: (state, action: PayloadAction<Nullable<string>>) => {
       state.avatar.previewImage = action.payload;
     },
     setAvatarImage: (state) => {
