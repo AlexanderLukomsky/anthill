@@ -1,6 +1,6 @@
 'use client';
 
-import { Stack } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import { FC, useEffect, useRef, useState } from 'react';
 import ReactPlayer from 'react-player';
 import { OnProgressProps } from 'react-player/base';
@@ -85,14 +85,21 @@ export const VideoPlayer: FC<VideoPlayerProps> = () => {
     }
   }, []);
 
+  const containerWidth = screenfull.isFullscreen ? '100%' : '1280px';
+
   return (
     <Stack
       alignItems="center"
       justifyContent="center"
       sx={{
-        bgcolor: 'rgba(255, 255, 255, 0.3)',
+        bgcolor: 'rgba(27, 27, 27, 0.4)',
         height: '100vh',
-        position: 'relative',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        p: '24px',
       }}
     >
       <Stack
@@ -111,20 +118,24 @@ export const VideoPlayer: FC<VideoPlayerProps> = () => {
         <CloseButton onClick={() => {}} />
 
         {hasWindow && (
-          <ReactPlayer
-            ref={playerRef}
-            url="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4"
-            playing={playing}
-            volume={volume}
-            muted={muted}
-            onProgress={handlePlayerProgress}
-            controls={false}
-            width="100%"
-            height="100%"
-            onPlay={handlePlay}
-            onPause={handlePause}
-            loop={false}
-          />
+          <Box sx={{ maxWidth: containerWidth, width: '100%' }}>
+            <Box sx={{ position: 'relative', paddingTop: '56.25%' }}>
+              <ReactPlayer
+                ref={playerRef}
+                url="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4"
+                playing={playing}
+                volume={volume}
+                muted={muted}
+                onProgress={handlePlayerProgress}
+                controls={false}
+                width="100%"
+                height="100%"
+                onPlay={handlePlay}
+                onPause={handlePause}
+                loop={false}
+              />
+            </Box>
+          </Box>
         )}
         <Controls
           isFullScreen={isFullScreen}
