@@ -128,8 +128,6 @@ export const VideoPlayer: FC<VideoPlayerProps> = () => {
                 muted={muted}
                 onProgress={handlePlayerProgress}
                 controls={false}
-                width="100%"
-                height="100%"
                 onPlay={handlePlay}
                 onPause={handlePause}
                 loop={false}
