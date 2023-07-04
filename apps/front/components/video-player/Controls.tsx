@@ -7,31 +7,25 @@ import { Range } from './Range';
 type ControlsProps = {
   isFullScreen: boolean;
   playing: boolean;
-  muted: boolean;
   volume: number;
   movieDuration: number;
   currentPlayerTime: number;
   onPlay: () => void;
   onPause: () => void;
-  onMute: () => void;
-  onUnmute: () => void;
   onToggleScreenMode: () => void;
-  onVolumeChange: (event: Event, value: number) => void;
-  onPlayerTimeChange: (event: Event, value: number) => void;
+  onVolumeChange: (event: Event, value: number | number[]) => void;
+  onPlayerTimeChange: (event: Event, value: number | number[]) => void;
   onPlayerTimeChangeCommitted: () => void;
 };
 
 export const Controls: FC<ControlsProps> = ({
   isFullScreen,
   playing,
-  muted,
   volume,
   movieDuration,
   currentPlayerTime,
   onPlay,
   onPause,
-  onMute,
-  onUnmute,
   onToggleScreenMode,
   onVolumeChange,
   onPlayerTimeChange,
@@ -72,13 +66,7 @@ export const Controls: FC<ControlsProps> = ({
           </IconButton>
         )}
 
-        <VolumeControl
-          muted={muted}
-          volume={volume}
-          onChange={onVolumeChange}
-          onMute={onMute}
-          onUnmute={onUnmute}
-        />
+        <VolumeControl volume={volume} onChange={onVolumeChange} />
 
         <IconButton sx={{ width: '24px', height: '24px', p: 0 }} onClick={onToggleScreenMode}>
           {isFullScreen && <MinimizeIcon />}

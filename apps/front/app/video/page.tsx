@@ -1,4 +1,5 @@
-import { VideoPlayer } from 'components/video-player';
+import { Video } from 'components/pages/video';
 
-const VideoPage = () => <VideoPlayer />;
+const VideoPage = () => <Video />;
+
 export default VideoPage;

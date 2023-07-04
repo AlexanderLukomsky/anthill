@@ -4,23 +4,18 @@ import { SoundOnIcon, VolumeOffIcon } from './Icons';
 import { Range } from './Range';
 
 type VolumeControlProps = {
-  muted: boolean;
   volume: number;
   onChange: (event: Event, value: number) => void;
-  onMute: () => void;
-  onUnmute: () => void;
 };
 
-export const VolumeControl: FC<VolumeControlProps> = ({
-  muted,
-  volume,
-  onChange,
-  onMute,
-  onUnmute,
-}) => {
+export const VolumeControl: FC<VolumeControlProps> = ({ volume, onChange }) => {
   const sliderRef = useRef<HTMLDivElement | null>(null);
 
   const [isShow, setIsShow] = useState(false);
+
+  const handleIconClick = () => {
+    setIsShow((prev) => !prev);
+  };
 
   return (
     <Box
@@ -32,17 +27,10 @@ export const VolumeControl: FC<VolumeControlProps> = ({
         setIsShow(false);
       }}
     >
-      {!muted && (
-        <IconButton onClick={onMute} sx={{ width: '24px', height: '24px', p: 0 }}>
-          <SoundOnIcon />
-        </IconButton>
-      )}
-
-      {muted && (
-        <IconButton onClick={onUnmute} sx={{ width: '24px', height: '24px', p: 0 }}>
-          <VolumeOffIcon />
-        </IconButton>
-      )}
+      <IconButton onClick={handleIconClick} sx={{ width: '24px', height: '24px', p: 0 }}>
+        {volume > 0 && <SoundOnIcon />}
+        {volume === 0 && <VolumeOffIcon />}
+      </IconButton>
 
       {isShow && (
         <Box
