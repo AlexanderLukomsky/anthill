@@ -48,6 +48,11 @@ import { SendIconOutline } from 'packages.icons.send-outline';
 import { TrashIcon } from 'packages.icons.trash';
 import { TrashIconOutline } from 'packages.icons.trash-outline';
 import { TrendingUpIcon } from 'packages.icons.trending-up';
+import { PlayIcon } from 'packages.icons.play';
+import { PauseIcon } from 'packages.icons.pause';
+import { SoundOnIcon } from 'packages.icons.sound-on';
+import { SoundOffIcon } from 'packages.icons.sound-off';
+import { CollapseIcon } from 'packages.icons.collapse';
 
 export const icons = [
   {
@@ -85,6 +90,7 @@ export const icons = [
     path: "import { EmailIconOutline } from 'packages.icons.email-outline';",
   },
   { icon: ExpandIcon, path: "import { ExpandIcon } from 'packages.icons.expand';" },
+  { icon: CollapseIcon, path: "import { CollapseIcon } from 'packages.icons.collapse';" },
   { icon: EyeOffIcon, path: "import { EyeOffIcon } from 'packages.icons.eye-off';" },
   {
     icon: EyeOffIconOutline,
@@ -177,5 +183,21 @@ export const icons = [
   {
     icon: TrendingUpIcon,
     path: "import { TrendingUpIcon } from 'packages.icons.trending-up';",
+  },
+  {
+    icon: PlayIcon,
+    path: "import { PlayIcon } from 'packages.icons.play';",
+  },
+  {
+    icon: PauseIcon,
+    path: "import { PauseIcon } from 'packages.icons.pause';",
+  },
+  {
+    icon: SoundOnIcon,
+    path: "import { SoundOnIcon } from 'packages.icons.sound-on';",
+  },
+  {
+    icon: SoundOffIcon,
+    path: "import { SoundOffIcon } from 'packages.icons.sound-off';",
   },
 ];
