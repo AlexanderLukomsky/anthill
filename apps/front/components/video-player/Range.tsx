@@ -1,5 +1,6 @@
 import { Slider } from '@mui/material';
-import { FC } from 'react';
+import { FC, SyntheticEvent } from 'react';
+import { rangeStyle } from './style';
 
 type RangeProps = {
   min: number;
@@ -7,8 +8,8 @@ type RangeProps = {
   value: number;
   step?: number;
   orientation?: 'horizontal' | 'vertical';
-  onChange: (event: Event, value: number) => void;
-  onChangeCommitted?: (event: Event, value: number) => void;
+  onChange: (event: Event, value: number | number[]) => void;
+  onChangeCommitted?: (event: Event | SyntheticEvent, value: number | number[]) => void;
 };
 
 export const Range: FC<RangeProps> = ({
@@ -16,25 +17,12 @@ export const Range: FC<RangeProps> = ({
   max,
   value,
   step,
-  orientation,
+  orientation = 'horizontal',
   onChange,
   onChangeCommitted,
 }) => (
   <Slider
-    sx={{
-      '& .MuiSlider-thumb': {
-        color: '#fff',
-        '&:hover': {
-          boxShadow: 'none',
-        },
-      },
-      '& .MuiSlider-track': {
-        bgcolor: '#fff',
-      },
-      '& .MuiSlider-rail': {
-        bgcolor: 'rgba(255, 255, 255, 0.30)',
-      },
-    }}
+    sx={{ ...rangeStyle.default, ...rangeStyle[orientation] }}
     min={min}
     max={max}
     value={value}
